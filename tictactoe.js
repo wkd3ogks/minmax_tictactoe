@@ -131,8 +131,6 @@ const getCurrentPlayer = (turn) => {
 }
 
 /* 게임 로직 */
-// 이기면 1000점, 무승부시 100점, 승부가 나지 않았으면 0점
-
 const evaluateGameState = (turn) => {
     // 현재 턴이 9인데 승자가 없으면 무승부다.
     const selectedBoard = getCurrentPlayer(turn) == 'o' ? playerOBoard : playerXBoard;
@@ -229,13 +227,6 @@ const initGame = () => {
         });
     }
 } 
-
-/* 승리 예측 */
-
-/* 힌트 기능 */
-
-/* 게임 진행 통계 */
-// 로컬 스토리지 사용해서 저장하자.
 
 /* 인공지능 로직(알파 베타 프루닝 추가 필요)  */
 const evaluateBoard = (turn, board) => {

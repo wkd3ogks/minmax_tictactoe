@@ -46,7 +46,7 @@ html {
 }
 
 .main__status {
-    width: 300px;
+    width: 280px;
     display: flex;
     justify-content: space-between;
     margin: 10px 0;
