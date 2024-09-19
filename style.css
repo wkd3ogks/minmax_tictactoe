@@ -1,5 +1,7 @@
 * {
     box-sizing: border-box;
+    font-size: 16px;
+    color: #3C3D37;
 }
 
 html {
@@ -35,15 +37,22 @@ html {
     width: 300px;
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
     justify-content: space-between;
 }
 
 .main__header__title {
     font-size: 35px;
     font-weight: bolder;
-    color: #3C3D37;
 }
+
+.main__status {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    font-weight: 700;
+}
+
 .main__playground {
     position: relative;
 }
@@ -73,7 +82,6 @@ html {
     transform: translate(-50%, -50%);
     font-size: 70px;
     font-weight: 700;
-    color: #3C3D37;
     visibility: hidden;
     z-index: 2;
 }
@@ -90,7 +98,7 @@ html {
     z-index: 1;
 }
 
-.main__information__menu {
+.main__controller__menu {
     margin-top: 10px;
     width: 300px;
     display: flex;
@@ -98,11 +106,11 @@ html {
     align-items: center;
 }
 
-.main__information__menu__forward, .main__information__menu__backward {
+.main__controller__menu__forward, .main__controller__menu__backward {
     cursor: pointer;
 }
 
-.main__information__menu__restart-button {
+.main__controller__menu__restart-button {
     cursor: pointer;
     border-radius: 4px;
     color: white;

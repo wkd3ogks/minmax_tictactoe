@@ -1,15 +1,18 @@
 const renderBoard = document.querySelectorAll('td');
 
-const $gamePlayHistory = document.querySelector('.main__information__history');
-const $HistoryForwardButton = document.querySelector('.main__information__menu__forward');
-const $HistoryBackwardButton = document.querySelector('.main__information__menu__backward');
+const $gamePlayHistory = document.querySelector('.main__controller__history');
+const $HistoryForwardButton = document.querySelector('.main__controller__menu__forward');
+const $HistoryBackwardButton = document.querySelector('.main__controller__menu__backward');
 
 const $aiButton = document.querySelector('.main__header__ai-btn');
 const $aiIcon = document.querySelector('.main__header__ai-btn path');
-const $restartGameButton = document.querySelector('.main__information__menu__restart-button');
+const $restartGameButton = document.querySelector('.main__controller__menu__restart-button');
 
 const $renderState = document.querySelector('.main__playground__result');
 const $restartBlock = document.querySelector('.main__playground__restart');
+
+const $renderPlayer = document.querySelector('.main__status__player');
+const $renderPredict = document.querySelector('.main__status__predict');
 
 const INF = 3000
 const WIN = 1000
@@ -161,6 +164,9 @@ const restartGame = () => {
 
     $restartBlock.style.display = 'none';
     $renderState.classList.remove('popup-animaition');
+    $renderPlayer.innerHTML = 'Player: ' + getCurrentPlayer(turn).toUpperCase();
+
+    $renderPredict.innerHTML = 'Predict: Wait' ;
 }
 
 const updateHistory = (playerOBoard, playerXBoard) => {
@@ -205,8 +211,19 @@ const initGame = () => {
             if (!( combinedBoard & ( 1 << selectedBit) )) {
                 selectAudio.play();
                 play(i, selectedBit);
+                $renderPlayer.innerHTML = 'Player: ' + getCurrentPlayer(turn).toUpperCase();
                 if(aiPlayState) {
                     minMaxDecision();
+                } 
+                const predictState = maxPlay(turn, playerOBoard, playerXBoard, 0, 0);
+                if(predictState[0] == DRAW) {
+                    $renderPredict.innerHTML = 'Predict: Draw';
+                } else {
+                    const currentPlayer = getCurrentPlayer(turn);
+                    if(predictState[0] < 0)
+                        $renderPredict.innerHTML = 'Predict: ' + getCurrentPlayer(turn + 1).toUpperCase() + ' Win';
+                    else 
+                        $renderPredict.innerHTML = 'Predict: ' + currentPlayer.toUpperCase() + ' Win';
                 }
             }
         });
@@ -298,8 +315,9 @@ const maxPlay = (turn, playerOBoard, playerXBoard, alpha, beta) => {
 }
 
 const minMaxDecision = () => {
-    const BoardPosition = maxPlay(turn, playerOBoard, playerXBoard, 0, 0)[1];
-    play(Math.abs(8 - BoardPosition), BoardPosition);
+    const nextPlayInfo = maxPlay(turn, playerOBoard, playerXBoard, 0, 0);   
+    play(Math.abs(8 - nextPlayInfo[1]), nextPlayInfo[1]);
+    return nextPlayInfo[0];
 }
 
 initGame();
