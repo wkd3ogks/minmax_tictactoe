@@ -246,7 +246,7 @@ const evaluateBoard = (turn, board) => {
 };
 
 const minPlay = (turn, playerOBoard, playerXBoard, alpha, beta) => {
-    /* leaf node 확인 */
+    
     const currentPlayer = getCurrentPlayer(turn);
     let playerBoard = currentPlayer == 'o' ? playerOBoard : playerXBoard;
 
